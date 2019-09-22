@@ -1,3 +1,9 @@
+from pymongo import MongoClient
+
+client = MongoClient()
+db = client.Playlister
+playlists = db.playlists
+
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -9,7 +15,7 @@ app = Flask(__name__)
 
 # OUR MOCK ARRAY OF PROJECTS
 playlists = [
-    { 'title': 'Cat Videos', 'description': 'Cats acting weird' },
+    { 'title': 'Cat Videos', 'description': 'Cats thinking they are people' },
     { 'title': '80\'s Music', 'description': 'Don\'t stop believing!' }
 ]
 
