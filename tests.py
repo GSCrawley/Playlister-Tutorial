@@ -1,5 +1,5 @@
 # tests.py
-from unittest import TestCase, main as unittest_main
+from unittest import TestCase, main as unittest_main, mock
 from app import app
 from bson.objectid import ObjectId
 
@@ -46,7 +46,7 @@ class PlaylistsTests(TestCase):
     def test_show_playlist(self, mock_find):
         """Test showing a single playlist."""
         mock_find.return_value = sample_playlist
-
+    
         result = self.client.get(f'/playlists/{sample_playlist_id}')
         self.assertEqual(result.status, '200 OK')
         self.assertIn(b'Cat Videos', result.data)
