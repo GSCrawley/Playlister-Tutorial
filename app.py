@@ -1,5 +1,4 @@
 from pymongo import MongoClient
-from bson.objectid import ObjectId
 
 client = MongoClient()
 db = client.Playlister
@@ -16,6 +15,7 @@ app = Flask(__name__)
 #   { 'title': 'Great Playlist' },
 #   { 'title': 'Next Playlist' }
 # ]
+from bson.objectid import ObjectId
 
 @app.route('/')
 def playlists_index():
@@ -26,7 +26,6 @@ def playlists_index():
 def playlists_new():
     """Create a new playlist."""
     return render_template('playlists_new.html', playlist={}, title='New Playlist')
-
 
 @app.route('/playlists', methods=['POST'])
 def playlists_submit():
@@ -69,6 +68,6 @@ def playlists_delete(playlist_id):
     """Delete one playlist."""
     playlists.delete_one({'_id': ObjectId(playlist_id)})
     return redirect(url_for('playlists_index'))
-    
+
 if __name__ == '__main__':
     app.run(debug=True)
