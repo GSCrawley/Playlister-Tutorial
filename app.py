@@ -1,3 +1,4 @@
+import os
 from pymongo import MongoClient
 
 client = MongoClient()
@@ -8,13 +9,6 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-# OUR MOCK ARRAY OF PROJECTS
-# app.py
-
-# playlists = [
-#   { 'title': 'Great Playlist' },
-#   { 'title': 'Next Playlist' }
-# ]
 from bson.objectid import ObjectId
 
 @app.route('/')
@@ -42,7 +36,7 @@ def playlists_submit():
 def playlists_show(playlist_id):
     """Show a single playlist."""
     playlist = playlists.find_one({'_id': ObjectId(playlist_id)})
-    return render_template('playlists_show.html', playlist=playlist)
+    return redirect(url_for('playlists_show', playlist_id=request.form.get('playlist_id')))
 
 @app.route('/playlists/<playlist_id>/edit')
 def playlists_edit(playlist_id):
@@ -69,5 +63,10 @@ def playlists_delete(playlist_id):
     playlists.delete_one({'_id': ObjectId(playlist_id)})
     return redirect(url_for('playlists_index'))
 
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Playlister')
+client = MongoClient(host=host)
+db = client.get_default_database()
+playlists = db.playlists
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
