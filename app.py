@@ -29,6 +29,7 @@ def playlists_submit():
         'description': request.form.get('description'),
         'videos': request.form.get('videos').split()
     }
+    print(playlist)
     playlist_id = playlists.insert_one(playlist).inserted_id
     return redirect(url_for('playlists_show', playlist_id=playlist_id))
 
