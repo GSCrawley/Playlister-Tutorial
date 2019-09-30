@@ -36,7 +36,7 @@ def playlists_submit():
 def playlists_show(playlist_id):
     """Show a single playlist."""
     playlist = playlists.find_one({'_id': ObjectId(playlist_id)})
-    return redirect(url_for('playlists_show', playlist=request.form.get('playlist_id')))
+    return redirect(url_for('playlists_show', playlist_id=request.form.get('playlist_id')))
 
 @app.route('/playlists/<playlist_id>/edit')
 def playlists_edit(playlist_id):
@@ -63,7 +63,7 @@ def playlists_delete(playlist_id):
     playlists.delete_one({'_id': ObjectId(playlist_id)})
     return redirect(url_for('playlists_index'))
 
-host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Playlister')
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Playlister/test?retryWrites=False')
 client = MongoClient(host=host)
 db = client.get_default_database()
 playlists = db.playlists
