@@ -37,7 +37,7 @@ def playlists_submit():
 def playlists_show(playlist_id):
     """Show a single playlist."""
     playlist = playlists.find_one({'_id': ObjectId(playlist_id)})
-    return redirect(url_for('playlists_show', playlist_id=request.form.get('playlist_id')))
+    return render_template('playlists_show.html', playlist=playlist)
 
 @app.route('/playlists/<playlist_id>/edit')
 def playlists_edit(playlist_id):
