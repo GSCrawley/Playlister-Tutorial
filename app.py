@@ -63,7 +63,7 @@ def playlists_delete(playlist_id):
     playlists.delete_one({'_id': ObjectId(playlist_id)})
     return redirect(url_for('playlists_index'))
 
-host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Playlister/test?retryWrites=False')
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Playlister/test?retryWrites=false')
 client = MongoClient(host=host)
 db = client.get_default_database()
 playlists = db.playlists
