@@ -11,7 +11,7 @@ comments = db.comments
 host = os.environ.get('MONGODB_URI')
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
-playlists = db.playlists
+# playlists = db.playlists
 app = Flask(__name__)
 
 from bson.objectid import ObjectId
