@@ -2,20 +2,20 @@ import os
 from pymongo import MongoClient
 
 client = MongoClient()
-db = client.get_default_database()
+db = client.Playlister
 playlists = db.playlists
 
 from flask import Flask, render_template, request, redirect, url_for
-
-app = Flask(__name__)
-
-from bson.objectid import ObjectId
 
 comments = db.comments
 host = os.environ.get('MONGODB_URI')
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 playlists = db.playlists
+app = Flask(__name__)
+
+from bson.objectid import ObjectId
+
 
 @app.route('/')
 def playlists_index():
