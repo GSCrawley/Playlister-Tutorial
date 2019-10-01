@@ -13,8 +13,6 @@ comments = db.comments
 app = Flask(__name__)
 
 
-
-
 @app.route('/')
 def playlists_index():
     """Show all playlists."""
