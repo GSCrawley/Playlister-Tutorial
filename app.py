@@ -8,7 +8,7 @@ playlists = db.playlists
 from flask import Flask, render_template, request, redirect, url_for
 
 comments = db.comments
-host = os.environ.get('MONGODB_URI')
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Playlister')
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 # playlists = db.playlists
