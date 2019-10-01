@@ -9,9 +9,7 @@ db = client.get_default_database()
 playlists = db.playlists
 comments = db.comments
 
-# playlists = db.playlists
 app = Flask(__name__)
-
 
 @app.route('/')
 def playlists_index():
